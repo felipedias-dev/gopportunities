@@ -8,11 +8,11 @@ import (
 )
 
 type Logger struct {
-	debug *log.Logger
-	info *log.Logger
+	debug   *log.Logger
+	info    *log.Logger
 	warning *log.Logger
-	err *log.Logger
-	writer io.Writer
+	err     *log.Logger
+	writer  io.Writer
 }
 
 func NewLogger(prefix string) *Logger {
@@ -25,11 +25,11 @@ func NewLogger(prefix string) *Logger {
 	errorPrefix := fmt.Sprintf("[%s] - ERROR: ", prefix)
 
 	return &Logger{
-		debug: log.New(writer, debugPrefix, logger.Flags()),
-		info: log.New(writer, infoPrefix, logger.Flags()),
+		debug:   log.New(writer, debugPrefix, logger.Flags()),
+		info:    log.New(writer, infoPrefix, logger.Flags()),
 		warning: log.New(writer, warningPrefix, logger.Flags()),
-		err: log.New(writer, errorPrefix, logger.Flags()),
-		writer: writer,
+		err:     log.New(writer, errorPrefix, logger.Flags()),
+		writer:  writer,
 	}
 }
 
