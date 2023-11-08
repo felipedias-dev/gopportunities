@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"github.com/felipedias-dev/gopportunities/schema"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,4 +17,14 @@ func sendSuccess(ctx *gin.Context, statusCode int, data interface{}) {
 		"statusCode": statusCode,
 		"data":       data,
 	})
+}
+
+type ErrorResponse struct {
+	Message   string `json:"message"`
+	ErrorCode string `json:"errorCode"`
+}
+
+type CreateOpeningResponse struct {
+	Message string                 `json:"message"`
+	Data    schema.OpeningResponse `json:"data"`
 }
