@@ -29,18 +29,36 @@ func UpdateOpeningHandler(ctx *gin.Context) {
 		return
 	}
 
-	opening := schema.Opening{
-		Role:     request.Role,
-		Company:  request.Company,
-		Location: request.Location,
-		Remote:   request.Remote,
-		Salary:   request.Salary,
-		Link:     request.Link,
+	opening := schema.Opening{}
+
+	if err := db.First(&opening, id).Error; err != nil {
+		logger.Errorf("update opening error: %v", err.Error())
+		sendError(ctx, http.StatusNotFound, "opening not found")
+		return
+	}
+
+	if request.Company != "" {
+		opening.Company = request.Company
+	}
+	if request.Link != "" {
+		opening.Link = request.Link
+	}
+	if request.Location != "" {
+		opening.Location = request.Location
+	}
+	if request.Role != "" {
+		opening.Role = request.Role
+	}
+	if request.Remote != opening.Remote {
+		opening.Remote = request.Remote
+	}
+	if request.Salary != opening.Salary && request.Salary != 0 {
+		opening.Salary = request.Salary
 	}
 
 	if err := db.Save(&opening).Error; err != nil {
 		logger.Errorf("update opening error: %v", err.Error())
-		sendError(ctx, http.StatusInternalServerError, err.Error())
+		sendError(ctx, http.StatusInternalServerError, "update opening error")
 		return
 	}
 
