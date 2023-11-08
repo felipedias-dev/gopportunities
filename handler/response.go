@@ -25,6 +25,21 @@ type ErrorResponse struct {
 }
 
 type CreateOpeningResponse struct {
-	Message string                 `json:"message"`
-	Data    schema.OpeningResponse `json:"data"`
+	StatusCode int                    `json:"statusCode"`
+	Data       schema.OpeningResponse `json:"data"`
+}
+
+type ShowOpeningResponse struct {
+	StatusCode int                    `json:"statusCode"`
+	Data       schema.OpeningResponse `json:"data"`
+}
+
+type UpdateOpeningResponse struct {
+	StatusCode int                    `json:"statusCode"`
+	Data       schema.OpeningResponse `json:"data"`
+}
+
+type ListOpeningsResponse struct {
+	StatusCode int                      `json:"statusCode"`
+	Data       []schema.OpeningResponse `json:"data"`
 }
